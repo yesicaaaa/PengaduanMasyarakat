@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+body {
+    background-image: url('/img/bg-login.jpg');
+    background-size: cover;
+}
+
+.container-login {
+    background-color: rgba(69, 84, 97, 0.7);
+    margin-top: 15%;
+    width: 35%;
+    font-family: 'Noto Sans JP', sans-serif;
+    padding-bottom: 20px;
+}
+
+.container-register {
+    background-color: rgba(69, 84, 97, 0.7);
+    margin-top: 11%;
+    width: 35%;
+    font-family: 'Noto Sans JP', sans-serif;
+    padding-bottom: 20px;
+}
+
+.container-login h2,
+.container-register h2 {
+    color: white;
+    text-align: center;
+    padding: 20px 0 20px 0;
+}
+
+.input-group {
+    margin: 10px 36px;
+    width: 80%;
+}
+
+.btn-outline-blue {
+    border-color: #a7bac8;
+    margin: 10px 36px;
+    width: 80%;
+    border-radius: 0px;
+    color: white !important;
+}
+
+.btn-outline-blue:hover {
+    background-color: #496770;
+}
+
+.input-group-text {
+    background-color: #496770;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+input {
+    border-radius: 0px !important;
+}
+
+.not-register {
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    margin-left: 35px;
+    padding-bottom: 10px;
+}
+
+.not-register:hover {
+    color: rgba(255, 255, 255, .5);
+}
