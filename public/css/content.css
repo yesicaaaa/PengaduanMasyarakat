@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+.content {
+  margin-left: 150px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.breadcrumb {
+  margin-top: 10px;
+}
