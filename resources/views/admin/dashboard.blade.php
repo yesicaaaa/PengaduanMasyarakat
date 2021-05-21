@@ -2,7 +2,12 @@
 @extends('side-navbar')
 @section('sidenavcss', '/css/side-navbar.css')
 @section('content')
-        <!-- <x-slot name="header">
+@if(session('status'))
+<div class="alert alert-success" role="alert">
+    {{session('status')}}
+</div>
+@endif
+<!-- <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Dashboard for admin') }}
             </h2>

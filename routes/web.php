@@ -35,14 +35,30 @@ Route::get('/logout', [DashboardController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
-//route admin
-Route::get('/data_masyarakat', [AdminController::class, 'data_masyarakat']);
-Route::get('/data_petugas', [AdminController::class, 'data_petugas']);
+Route::group(['middleware' => ['auth']], function() {
+    //route admin
+    Route::get('/data_masyarakat', [AdminController::class, 'data_masyarakat']);
+    Route::get('/data_petugas', [AdminController::class, 'data_petugas']);
+        Route::get('/beri_tanggapan', [AdminController::class, 'tanggapan']);
+    
+    //route masyarakat
+    Route::get('/form_pengaduan', [MasyarakatController::class, 'index']);
+    Route::post('/proses_pengaduan', [MasyarakatController::class, 'proses_pengaduan']);
+    Route::get('/pengaduan_saya', [MasyarakatController::class, 'pengaduan_saya']);
+    Route::get('/tanggapan_pengaduan/{id}', [MasyarakatController::class, 'tanggapan_pengaduan']);
+    
+    //Route petugas
+    Route::get('/beri_tanggapan', [PetugasController::class, 'beri_tanggapan']);
+});
 
-//route masyarakat
-Route::get('/form_pengaduan', [MasyarakatController::class, 'index']);
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/beri_tanggapan_view_admin', [AdminController::class, 'tanggapan']);
+    Route::get('/beri_tanggapan/{id}', [AdminController::class, 'beri_tanggapan']);
+    Route::post('/kirim_tanggapan', [AdminController::class, 'kirim_tanggapan']);
+});
 
-//Route petugas
-Route::get('/beri_tanggapan', [PetugasController::class, 'beri_tanggapan']);
+Route::group(['middleware' => ['auth', 'role:petugas']], function () {
+    Route::get('/beri_tanggapan_view_petugas', [PetugasController::class, 'tanggapan']);
+});
 
 require __DIR__ . '/auth.php';
