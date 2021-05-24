@@ -55,7 +55,7 @@ class MasyarakatController extends Controller
     public function tanggapan_pengaduan($id)
     {
         $pengaduan = Pengaduan::where('id_pengaduan', $id)->get();
-        $tanggapan = Tanggapan::all();    
+        $tanggapan = Tanggapan::where('id_pengaduan', $id)->get();
         return view('masyarakat.tanggapan-pengaduan', compact('pengaduan', 'tanggapan'));
     }
 }

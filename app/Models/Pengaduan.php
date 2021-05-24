@@ -9,4 +9,9 @@ class Pengaduan extends Model
 {
     protected $table = "pengaduan";
     protected $fillable = ['tgl_pengaduan', 'id_user', 'isi_laporan', 'foto', 'status'];
+
+    public function tanggapan()
+    {
+        return $this->hasOne('App\Models\Tanggapan', 'id_tanggapan');
+    }
 }

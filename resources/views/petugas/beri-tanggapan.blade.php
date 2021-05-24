@@ -7,7 +7,7 @@
 <div class="content">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active">Admin</li>
+      <li class="breadcrumb-item active">Petugas</li>
       <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-fw fa-users mr-2"></i> Beri Tanggapan</li>
     </ol>
   </nav>
@@ -36,7 +36,7 @@
     <h5 class="tanggapan-title">Tanggapan</h5>
     <div class="card mb-3 card-tanggapan">
       <div class="col-md">
-        <form action="/kirim_tanggapan_admin" method="POST">
+        <form action="/kirim_tanggapan_petugas" method="POST">
           @csrf
           @if($p->status == 'proses')
           <textarea type="text" name="tanggapan" id="tanggapan" cols="30" rows="10"></textarea>

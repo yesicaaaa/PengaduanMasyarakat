@@ -37,12 +37,12 @@
         @if($p->status != 'selesai')
         <td>-</td>
         @endif
-        @if($p->status == 'selesai')
         @foreach($tanggapan as $t)
+        @if($p->status == 'selesai')
         <td>{{$t->tgl_tanggapan}}</td>
-        @endforeach
         @endif
-        <td><a href="/beri_tanggapan/{{$p->id_pengaduan}}" class="badge bg-success">Detail</a></td>
+        @endforeach
+        <td><a href="/beri_tanggapan_petugas/{{$p->id_pengaduan}}" class="badge bg-success">Detail</a></td>
       </tr>
       @endforeach
     </tbody>
