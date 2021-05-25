@@ -16,7 +16,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Tanggal Pengaduan</th>
-        <th scope="col">Nama Pengadu</th>
+        <th scope="col">Id Pengaduan</th>
         <th scope="col">Pengaduan</th>
         <th scope="col">Tanggal Tanggapan</th>
         <th scope="col">Isi Tanggapan</th>
@@ -29,7 +29,7 @@
       <tr>
         <th scope="row">{{$loop->iteration}}</th>
         <td>{{$l['tgl_pengaduan']}}</td>
-        <td>{{$l['nama_pengadu']}}</td>
+        <td>{{$l['id_pengadu']}}</td>
         <td>{{$l['pengaduan']}}</td>
         @if($l['status'] == 'selesai')
         <td>{{$l['tgl_tanggapan']}}</td>

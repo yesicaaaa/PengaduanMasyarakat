@@ -22,11 +22,11 @@
         <div class="card-body ml-body-card">
           <h5 class="card-title">{{Auth::user()->name}}</h5>
           <p class="card-text">{{$p->isi_laporan}}</p>
-          <p class="card-text"><small class="text-muted">{{$p->tgl_pengaduan}}</small></p>
         </div>
       </div>
     </div>
   </div>
+  <p class="card-text tgl-pengaduan"><small class="text-muted">{{$p->tgl_pengaduan}}</small></p>
   <div class="body-tanggapan">
     <h5 class="tanggapan-title">Tanggapan</h5>
     <div class="card mb-3 card-tanggapan">
@@ -35,7 +35,6 @@
           @if($p->status == 'selesai')
           @foreach($tanggapan as $t)
           <p class="card-text">{{$t->tanggapan}}</p>
-          <p class="card-text"><small class="text-muted">{{$t->tgl_tanggapan}}</small></p>
           @endforeach
           @endif
           @if($p->status == 'proses')
@@ -44,6 +43,7 @@
         </div>
       </div>
     </div>
+    <p class="card-text tgl-tanggapan"><small class="text-muted">{{$t->tgl_tanggapan}}</small></p>
   </div>
   @endforeach
 </div>

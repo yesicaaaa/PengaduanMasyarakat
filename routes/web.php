@@ -51,6 +51,12 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/beri_tanggapan_admin/{id}', [AdminController::class, 'beri_tanggapan']);
     Route::post('/kirim_tanggapan_admin', [AdminController::class, 'kirim_tanggapan']);
     Route::get('/generate_laporan', [AdminController::class, 'generate_laporan']); 
+    Route::get('/soft-delete/{id}', [AdminController::class, 'soft_delete']);
+    Route::get('/trash', [AdminController::class, 'trash']);
+    Route::get('/restore/{id}', [AdminController::class, 'restore']);
+    Route::get('/restore_all', [AdminController::class, 'restore_all']);
+    Route::get('/delete/{id}', [AdminController::class, 'delete']);
+    Route::get('/delete_permanent', [AdminController::class, 'delete_all']);
 });
 
 //route petugas

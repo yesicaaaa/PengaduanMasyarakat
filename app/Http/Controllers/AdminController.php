@@ -13,35 +13,22 @@ class AdminController extends Controller
 {
     public function data_masyarakat()
     {
-        $masyarakat = DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')->where('role_id', 3)->get();
+        $masyarakat = User::join('role_user', 'users.id', '=', 'role_user.user_id')->where('role_id', 3)->get();
         return view('admin.data-masyarakat', compact('masyarakat'));
     }
 
     public function data_petugas()
     {
-        $petugas = DB::table('users')->join('role_user', 'users.id', '=', 'role_user.user_id')->where('role_id', '!=', 3)->get();
+        $petugas = User::join('role_user', 'users.id', '=', 'role_user.user_id')->where('role_id', '!=', 3)->get();
         return view('admin.data-petugas', compact('petugas'));
     }
 
     public function tanggapan()
     {
-        $pengaduan = Pengaduan::Join('users', 'users.id', '=', 'pengaduan.id_user')->get();
-        $isi_tanggapan = array();
-        foreach ($pengaduan as $p) {
-            $tanggapan = Tanggapan::rightJoin('pengaduan', 'pengaduan.id_pengaduan', '=', 'tanggapan.id_pengaduan')
-                        ->where('tanggapan.id_pengaduan', '=', $p->id_pengaduan)->get();
-            foreach ($tanggapan as $t) {
-                $isi_tanggapan[] = array(
-                    'id_pengaduan'  => $p->id_pengaduan,
-                    'tgl_pengaduan' => $p->tgl_pengaduan,
-                    'nama_pengadu'  => $p->name,
-                    'status'        => $p->status,
-                    'tgl_tanggapan' => $t->tgl_tanggapan
-                );
-            }
-        }
-        $isi_pengaduan = $isi_tanggapan;
-        return view('admin.tanggapan', compact('isi_pengaduan'));
+        $pengaduan = Pengaduan::join('users', 'users.id', '=', 'pengaduan.id_user')
+            ->leftJoin('tanggapan', 'tanggapan.id_pengaduan', '=', 'pengaduan.id_pengaduan')
+            ->select('pengaduan.*', 'users.name', 'tanggapan.tgl_tanggapan')->get();
+        return view('admin.tanggapan', compact('pengaduan'));
     }
 
     public function beri_tanggapan($id)
@@ -69,29 +56,75 @@ class AdminController extends Controller
                 'status'    => $request->status
             ]);
 
-        return redirect('/beri_tanggapan/' . $request->id_pengaduan)->with('status', 'Tanggapan berhasil dikirim');
+        return redirect('/beri_tanggapan_admin/' . $request->id_pengaduan)->with('status', 'Tanggapan berhasil dikirim');
     }
 
     public function generate_laporan()
     {
-        $pengaduan = Pengaduan::join('users', 'users.id', '=', 'pengaduan.id_user')->get();
         $laporan = array();
-        foreach($pengaduan as $p) {
-            $tanggapan = Tanggapan::join('users', 'users.id', '=', 'tanggapan.id_petugas')
-                        ->where('id_pengaduan', $p->id_pengaduan)->get();
-        foreach($tanggapan as $t) {
+        $tanggapan = Tanggapan::rightJoin('users', 'users.id', '=', 'tanggapan.id_petugas')
+            ->rightJoin('pengaduan', 'pengaduan.id_pengaduan', '=', 'tanggapan.id_pengaduan')
+            ->select('tanggapan.*', 'users.name', 'pengaduan.*')
+            ->get();
+        foreach ($tanggapan as $t) {
             $laporan[] = array(
-                    'tgl_pengaduan' => $p->tgl_pengaduan,
-                    'nama_pengadu'  => $p->name,
-                    'pengaduan'     => $p->isi_laporan,
-                    'status'        => $p->status,
-                    'tgl_tanggapan' => $t->tgl_tanggapan,
-                    'isi_tanggapan' => $t->tanggapan,
-                    'nama_petugas'  => $t->name
-                );
-            }
+                'tgl_pengaduan' => $t->tgl_pengaduan,
+                'id_pengadu'    => $t->id_pengaduan,
+                'pengaduan'     => $t->isi_laporan,
+                'status'        => $t->status,
+                'tgl_tanggapan' => $t->tgl_tanggapan,
+                'isi_tanggapan' => $t->tanggapan,
+                'nama_petugas'  => $t->name
+            );
         }
         $isiLaporan = $laporan;
         return view('admin.generate-laporan', compact('isiLaporan'));
+    }
+
+    public function soft_delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/data_masyarakat')->with('status', 'Data user berhasil dihapus.');
+    }
+
+    public function trash()
+    {
+        $user = User::join('role_user', 'role_user.user_id', '=', 'users.id')
+                ->where('role_user.role_id', 3)->onlyTrashed()->get();
+        return view('admin.trash-masyarakat', compact('user'));
+    }
+
+    public function restore($id)
+    {
+        $restore = User::onlyTrashed()->where('id', $id);
+        $restore->restore();
+
+        return redirect('/trash')->with('status', 'Data user berhasil dipulihkan.');
+    }
+
+    public function restore_all()
+    {
+        $restore = User::onlyTrashed();
+        $restore->restore();
+
+        return redirect('/trash')->with('status', 'Semua data masyarakat berhasil dipulihkan');
+    }
+
+    public function delete($id)
+    {
+        $user_delete = User::onlyTrashed()->where('id', $id);
+        $user_delete->forceDelete();
+
+        return redirect('/trash')->with('status', 'Data masyarakat berhasil dihapus permanen.');
+    }
+
+    public function delete_all()
+    {
+        $delete_all = User::onlyTrashed();
+        $delete_all->forceDelete();
+
+        return redirect('/trash')->with('status', 'Semua data masyarakat berhasil dihapus permanen.');
     }
 }

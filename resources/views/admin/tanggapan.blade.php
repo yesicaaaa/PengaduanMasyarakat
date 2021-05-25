@@ -28,18 +28,18 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($isi_pengaduan as $is)
+      @foreach($pengaduan as $p)
       <tr>
         <th scope="row">{{$loop->iteration}}</th>
-        <td>{{$is['tgl_pengaduan']}}</td>
-        <td>{{$is['nama_pengadu']}}</td>
-        <td>{{$is['status']}}</td>
-        @if($is['status'] == 'selesai')
-        <td>{{$is['tgl_tanggapan']}}</td>
-        @else($is['status'] != 'selesai')
+        <td>{{$p['tgl_pengaduan']}}</td>
+        <td>{{$p['name']}}</td>
+        <td>{{$p['status']}}</td>
+        @if($p['status'] == 'selesai')
+        <td>{{$p['tgl_tanggapan']}}</td>
+        @else($p['status'] != 'selesai')
         <td>-</td>
         @endif
-        <td><a href="/beri_tanggapan_admin/{{$is['id_pengaduan']}}" class="badge bg-success">Detail</a></td>
+        <td><a href="/beri_tanggapan_admin/{{$p['id_pengaduan']}}" class="badge bg-success">Detail</a></td>
       </tr>
       @endforeach
     </tbody>

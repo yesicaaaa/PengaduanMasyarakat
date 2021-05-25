@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
+a {
+  text-decoration: none;
+}
+
 .content {
   margin-left: 150px;
   font-family: 'Josefin Sans', sans-serif;
@@ -47,4 +51,28 @@
 
 .img-pengaduan {
   width: 50%;
+}
+
+.tgl-pengaduan {
+  margin-left: 83%;
+}
+
+.tgl-tanggapan {
+  margin-left: 21%;
+}
+
+.button-delete {
+  color: red;
+}
+
+.button-delete:hover {
+  color: rgba(232, 10, 9, .6);
+}
+
+.button-pulihkan {
+    color: rgb(15, 128, 0);
+}
+
+.button-pulihkan:hover {
+    color: rgba(15, 128, 0, .6);
 }

@@ -27,11 +27,11 @@
         <div class="card-body ml-body-card">
           <h5 class="card-title">{{$p->name}}</h5>
           <p class="card-text">{{$p->isi_laporan}}</p>
-          <p class="card-text"><small class="text-muted">{{$p->tgl_pengaduan}}</small></p>
         </div>
       </div>
     </div>
   </div>
+  <p class="card-text tgl-pengaduan"><small class="text-muted">{{$p->tgl_pengaduan}}</small></p>
   <div class="body-tanggapan">
     <h5 class="tanggapan-title">Tanggapan</h5>
     <div class="card mb-3 card-tanggapan">
@@ -46,6 +46,7 @@
           @foreach($tanggapan as $t)
           @if($p->id_pengaduan == $t->id_pengaduan)
           <textarea id="tanggapan" cols="30" rows="10" disabled>{{$t->tanggapan}}</textarea>
+          <p class="card-text"><small class="text-muted">{{$t->tgl_tanggapan}}</small></p>
           @endif
           @endforeach
           <input type="hidden" name="id_petugas" value="{{Auth::user()->id}}">

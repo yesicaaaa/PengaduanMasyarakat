@@ -39,6 +39,10 @@
   list-style-type: none;
 }
 
+.side-menu {
+  margin-top: -30px;
+}
+
 .sidemenu a {
   color: white !important;
   text-decoration: none !important;
