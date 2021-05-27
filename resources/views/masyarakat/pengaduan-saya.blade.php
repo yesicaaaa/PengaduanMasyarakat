@@ -8,7 +8,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item active">Masyarakat</li>
-      <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-fw fa-users mr-2"></i> Pengaduan Saya</li>
+      <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-fw fa-file mr-2"></i> Pengaduan Saya</li>
     </ol>
   </nav>
   @if(session('status'))
@@ -16,6 +16,7 @@
     {{session('status')}}
   </div>
   @endif
+  <a href="/trash_pengaduan_masyarakat" class="btn btn-success mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
   <table class="table">
     <thead>
       <tr>
@@ -35,7 +36,10 @@
         <td>{{$p->isi_laporan}}</td>
         <td><img class="foto-pengaduan" src="/img/pengaduan_img/{{$p->foto}}" alt="foto"></td>
         <td>{{$p->status}}</td>
-        <td><a href="/tanggapan_pengaduan/{{$p->id_pengaduan}}" class="badge bg-success">Lihat</a></td>
+        <td>
+          <a href="/tanggapan_pengaduan/{{$p->id_pengaduan}}" class="button-detail"><i class="fa fa-fw fa-comment"></i> Detail</a>
+          <a href="/soft_delete_pengaduan_masyarakat/{{$p->id_pengaduan}}" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td>
       </tr>
       @endforeach
     </tbody>

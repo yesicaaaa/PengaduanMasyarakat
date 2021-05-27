@@ -47,7 +47,7 @@
         <div class="flex items-center justify-end mt-4">
             <button type="submit" class="btn btn-outline-blue">REGISTER</button>
 
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 not-register" href="{{ route('register') }}">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 not-register" href="{{ route('login') }}">
                 {{ __('Already Registered?') }}
             </a>
         </div>

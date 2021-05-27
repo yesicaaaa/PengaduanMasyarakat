@@ -10,11 +10,11 @@ class DashboardController extends Controller
     public function index()
     {
         if(Auth::user()->hasRole('admin')){
-            return view('admin.dashboard');
+            return redirect('/data_masyarakat')->with('status', 'Anda berhasil login sebagai admin.');
         }elseif(Auth::user()->hasRole('petugas')){
-            return view('petugas.dashboard');
+            return redirect('/beri_tanggapan_view_petugas')->with('status', 'Anda berhasil login sebagai petugas.');
         }elseif(Auth::user()->hasRole('masyarakat')){
-            return view('masyarakat.dashboard');
+            return redirect('/pengaduan_saya')->with('status', 'Anda berhasil login sebagai masyarakat.');
         }
     }
 

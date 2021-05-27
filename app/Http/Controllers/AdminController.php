@@ -7,7 +7,11 @@ use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
+use App\Exports\MasyarakatExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class AdminController extends Controller
 {
@@ -92,7 +96,7 @@ class AdminController extends Controller
     public function trash()
     {
         $user = User::join('role_user', 'role_user.user_id', '=', 'users.id')
-                ->where('role_user.role_id', 3)->onlyTrashed()->get();
+            ->where('role_user.role_id', 3)->onlyTrashed()->get();
         return view('admin.trash-masyarakat', compact('user'));
     }
 
@@ -126,5 +130,143 @@ class AdminController extends Controller
         $delete_all->forceDelete();
 
         return redirect('/trash')->with('status', 'Semua data masyarakat berhasil dihapus permanen.');
+    }
+
+    public function add_petugas()
+    {
+        return view('admin.tambah-petugas');
+    }
+
+    public function add_petugas_process(Request $request)
+    {
+        $request->validate([
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users',
+            'telp'      => 'required|max:13',
+            'password'  => 'required|min:6|same:confirm_password',
+            'confirm_password' => 'required|min:6|same:password'
+        ]);
+
+        User::create([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'telp'      => $request->telp,
+            'password'  => Hash::make($request->password)
+        ])->attachRole('petugas');
+
+        return redirect('/data_petugas')->with('status', 'Petugas baru berhasil ditambahkan.');
+    }
+
+    public function soft_delete_petugas($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/data_petugas')->with('status', 'Data petugas berhasil dihapus.');
+    }
+
+    public function trash_petugas()
+    {
+        $user = User::join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->where('role_user.role_id', '!=', 3)
+            ->onlyTrashed()->get();
+
+        return view('admin.trash-petugas', compact('user'));
+    }
+
+    public function restore_petugas($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id);
+        $user->restore();
+
+        return redirect('/trash_petugas')->with('status', 'Data petugas berhasil dipulihkan');
+    }
+
+    public function delete_petugas($id)
+    {
+        $user = User::onlyTrashed()->where('id', $id);
+        $user->forceDelete();
+
+        return redirect('/trash_petugas')->with('status', 'Data petugas berhasil dihapus permanen');
+    }
+
+    public function delete_permanent_petugas()
+    {
+        $user = User::onlyTrashed();
+        $user->forceDelete();
+
+        return redirect('/trash_petugas')->with('status', 'Semua data petugas berhasil dihapus permanen');
+    }
+
+    public function restore_all_petugas()
+    {
+        $user = User::onlyTrashed();
+        $user->forceDelete();
+
+        return redirect('/trash_petugas')->with('status', 'Semua data petugas berhasil dipulihkan');
+    }
+
+    public function trash_pengaduan()
+    {
+        $pengaduan = Pengaduan::join('users', 'users.id', '=', 'pengaduan.id_user')
+            ->onlyTrashed()->get();
+
+        return view('admin.trash-pengaduan', compact('pengaduan'));
+    }
+
+    public function delete_pengaduan($id)
+    {
+        $pengaduan = Pengaduan::where('id_pengaduan', $id);
+        $pengaduan->delete();
+
+        return redirect('/beri_tanggapan_view_admin')->with('status', 'Data pengaduan berhasil dihapus.');
+    }
+
+    public function restore_pengaduan($id)
+    {
+        $pengaduan = Pengaduan::onlyTrashed()->where('id_pengaduan', $id);
+        $pengaduan->restore();
+
+        return redirect('/trash_pengaduan')->with('status', 'Data pengaduan berhasil dipulihkan');
+    }
+
+    public function delete_permanent_pengaduan($id)
+    {
+        $foto = Pengaduan::onlyTrashed()->where('id_pengaduan', $id)->get();
+        foreach ($foto as $f) {
+            File::delete('img/pengaduan_img/' . $f->foto);
+        }
+
+        $pengaduan = Pengaduan::onlyTrashed()->where('id_pengaduan', $id);
+        $pengaduan->forceDelete();
+
+        return redirect('/trash_pengaduan')->with('status', 'Data pengaduan berhasil dihapus');
+    }
+
+    public function all_delete_permanent_pengaduan()
+    {
+        $foto = Pengaduan::onlyTrashed()->get();
+        foreach ($foto as $f) {
+            File::delete('img/pengaduan_img/' . $f->foto);
+        }
+        
+        $pengaduan = Pengaduan::onlyTrashed();
+        $pengaduan->forceDelete();
+
+        return redirect('/trash_pengaduan')->with('status', 'Semua data pengaduan berhasil dihapus');
+    }
+
+    public function restore_all_pengaduan()
+    {
+        $pengaduan = Pengaduan::onlyTrashed();
+        $pengaduan->restore();
+
+        return redirect('/trash_pengaduan')->with('status', 'Semua data pengaduan berhasil dihapus');
+    }
+
+    public function export_excel_masyarakat()
+    {
+        // return (new MasyarakatExport)->download('data-masyarakat.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new MasyarakatExport, 'data-masyarakat.xlsx');
     }
 }

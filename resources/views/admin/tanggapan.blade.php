@@ -16,6 +16,7 @@
     {{session('status')}}
   </div>
   @endif
+  <a href="/trash_pengaduan" class="btn btn-success"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
   <table class="table">
     <thead>
       <tr>
@@ -24,7 +25,7 @@
         <th scope="col">Nama Pengadu</th>
         <th scope="col">Status</th>
         <th scope="col">Tanggal Tanggapan</th>
-        <th scope="col">Detail</th>
+        <th scope="col">Aksi</th>
       </tr>
     </thead>
     <tbody>
@@ -39,7 +40,10 @@
         @else($p['status'] != 'selesai')
         <td>-</td>
         @endif
-        <td><a href="/beri_tanggapan_admin/{{$p['id_pengaduan']}}" class="badge bg-success">Detail</a></td>
+        <td>
+        <a href="/beri_tanggapan_admin/{{$p['id_pengaduan']}}" class="button-detail"><i class="fa fa-fw fa-search"></i> Detail</a>
+        <a href="/delete_pengaduan/{{$p['id_pengaduan']}}" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td>
       </tr>
       @endforeach
     </tbody>

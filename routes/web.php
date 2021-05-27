@@ -41,6 +41,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/proses_pengaduan', [MasyarakatController::class, 'proses_pengaduan']);
     Route::get('/pengaduan_saya', [MasyarakatController::class, 'pengaduan_saya']);
     Route::get('/tanggapan_pengaduan/{id}', [MasyarakatController::class, 'tanggapan_pengaduan']);
+    Route::get('/trash_pengaduan_masyarakat', [MasyarakatController::class, 'trash_pengaduan']);
+    Route::get('/soft_delete_pengaduan_masyarakat/{id}', [MasyarakatController::class, 'soft_delete']);
+    Route::get('/restore_pengaduan_masyarakat/{id}', [MasyarakatController::class, 'restore_pengaduan']);
+    Route::get('/restore_all_pengaduan_masyarakat', [MasyarakatController::class, 'restore_all']);
+    Route::get('/delete_permanent_pengaduan_masyarakat/{id}', [MasyarakatController::class, 'delete_pengaduan']);
+    Route::get('/all_delete_permanent_pengaduan_masyarakat', [MasyarakatController::class, 'all_delete_pengaduan']);
 });
 
 //route admin
@@ -57,6 +63,21 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/restore_all', [AdminController::class, 'restore_all']);
     Route::get('/delete/{id}', [AdminController::class, 'delete']);
     Route::get('/delete_permanent', [AdminController::class, 'delete_all']);
+    Route::get('/tambah_petugas', [AdminController::class, 'add_petugas']);
+    Route::post('/proses_tambah_petugas', [AdminController::class, 'add_petugas_process']);
+    Route::get('/soft_delete_petugas/{id}', [AdminController::class, 'soft_delete_petugas']);
+    Route::get('/trash_petugas', [AdminController::class, 'trash_petugas']);
+    Route::get('/restore_petugas/{id}', [AdminController::class, 'restore_petugas']);
+    Route::get('/delete_petugas/{id}', [AdminController::class, 'delete_petugas']);
+    Route::get('/delete_permanent_petugas', [AdminController::class, 'delete_permanent_petugas']);
+    Route::get('/restore_all_petugas', [AdminController::class, 'restore_all_petugas']);
+    Route::get('/trash_pengaduan', [AdminController::class, 'trash_pengaduan']);
+    Route::get('/delete_pengaduan/{id}', [AdminController::class, 'delete_pengaduan']);
+    Route::get('/delete_permanent_pengaduan/{id}', [AdminController::class, 'delete_permanent_pengaduan']);
+    Route::get('/restore_pengaduan/{id}', [AdminController::class, 'restore_pengaduan']);
+    Route::get('/all_delete_permanent_pengaduan', [AdminController::class, 'all_delete_permanent_pengaduan']);
+    Route::get('/restore_all_pengaduan', [AdminController::class, 'restore_all_pengaduan']);
+    Route::get('/export_excel_masyarakat', [AdminController::class, 'export_excel_masyarakat']);
 });
 
 //route petugas

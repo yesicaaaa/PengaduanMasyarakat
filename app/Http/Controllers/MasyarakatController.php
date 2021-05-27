@@ -7,7 +7,7 @@ use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class MasyarakatController extends Controller
 {
@@ -22,7 +22,7 @@ class MasyarakatController extends Controller
             'tgl_pengaduan' => 'required',
             'nama'          => 'required',
             'isi_laporan'   => 'required',
-            'foto'          => 'required|file|image|mimes:jpeg,png,jpg|max:1024'
+            'foto'          => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         //proses upload foto
@@ -57,5 +57,55 @@ class MasyarakatController extends Controller
         $pengaduan = Pengaduan::where('id_pengaduan', $id)->get();
         $tanggapan = Tanggapan::where('id_pengaduan', $id)->get();
         return view('masyarakat.tanggapan-pengaduan', compact('pengaduan', 'tanggapan'));
+    }
+
+    public function trash_pengaduan()
+    {
+        $pengaduan = Pengaduan::onlyTrashed()->get();
+
+        return view('masyarakat.trash-pengaduan', compact('pengaduan'));
+    }
+
+    public function soft_delete($id)
+    {
+        Pengaduan::where('id_pengaduan', $id)->delete();
+
+        return redirect('pengaduan_saya')->with('status', 'Pengaduan Anda telah dihapus.');
+    }
+
+    public function restore_pengaduan($id)
+    {
+        Pengaduan::onlyTrashed()->where('id_pengaduan', $id)->restore();
+
+        return redirect('/trash_pengaduan_masyarakat')->with('status', 'Pengaduan Anda telah dipulihkan');
+    }
+
+    public function restore_all()
+    {
+        Pengaduan::onlyTrashed()->restore();
+
+        return redirect('/trash_pengaduan_masyarakat')->with('status', 'Semua pengaduan Anda berhasil dipulihkan.');
+    }
+
+    public function delete_pengaduan($id)
+    {
+        $foto = Pengaduan::onlyTrashed()->where('id_pengaduan', $id)->get();
+        foreach($foto as $f){
+            File::delete('img/pengaduan_img/' . $f->foto);
+        }
+
+        Pengaduan::onlyTrashed()->where('id_pengaduan', $id)->forceDelete();
+        return redirect('trash_pengaduan_masyarakat')->with('status', 'Pengaduan Anda berhasil dihapus permanen.');
+    }
+
+    public function all_delete_pengaduan()
+    {
+        $foto = Pengaduan::onlyTrashed()->get();
+        foreach($foto as $f){
+            File::delete('img/pengaduan_img/' . $f->foto);
+        }
+
+        Pengaduan::onlyTrashed()->forceDelete();
+        return redirect('trash_pengaduan_masyarakat')->with('status', 'Semua pengaduan Anda berhasil dihapus');
     }
 }

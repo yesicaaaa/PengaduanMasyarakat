@@ -35,6 +35,7 @@
           @if($p->status == 'selesai')
           @foreach($tanggapan as $t)
           <p class="card-text">{{$t->tanggapan}}</p>
+          <p class="card-text"><small class="text-muted">{{$t->tgl_tanggapan}}</small></p>
           @endforeach
           @endif
           @if($p->status == 'proses')
@@ -43,7 +44,6 @@
         </div>
       </div>
     </div>
-    <p class="card-text tgl-tanggapan"><small class="text-muted">{{$t->tgl_tanggapan}}</small></p>
   </div>
   @endforeach
 </div>

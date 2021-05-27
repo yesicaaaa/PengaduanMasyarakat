@@ -12,6 +12,7 @@
     </ol>
   </nav>
   <a href="/trash" class="btn btn-success mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
+  <a href="/export_excel_masyarakat" class="btn btn-warning mb-3"><i class="fa fa-fw fa-download"></i>Export Excel</a>
   @if(session('status'))
   <div class="alert alert-success" role="alert">
     {{session('status')}}
@@ -35,7 +36,7 @@
         <td>{{$m->email}}</td>
         <td>{{$m->telp}}</td>
         <td>
-          <a href="/soft-delete/{{$m->id}}" class="button-delete"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+          <a href="/soft-delete/{{$m->id}}" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
         </td>
       </tr>
       @endforeach

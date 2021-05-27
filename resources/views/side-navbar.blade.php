@@ -17,6 +17,7 @@
   <div class="sidenav">
     <ul class="sidemenu">
       @if(Auth::user()->hasRole('admin'))
+      <div class="divider"></div>
       <li><a href="/data_masyarakat" class="menu"><i class="fa fa-fw fa-users"></i> Data Masyarakat</a></li>
       <div class="divider"></div>
       <li><a href="/data_petugas" class="menu"><i class="fa fa-fw fa-users"></i> Data Petugas</a></li>

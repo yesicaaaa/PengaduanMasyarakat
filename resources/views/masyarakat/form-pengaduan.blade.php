@@ -17,7 +17,7 @@
         @csrf
         <div class="mb-3">
           <label for="tgl_pengaduan" class="form-label">Tanggal Pengaduan</label>
-          <input type="date" class="form-control @error('tgl_pengaduan') is-invalid @enderror" id="tgl_pengaduan" name="tgl_pengaduan" value="{{old('tgl_pengaduan')}}">
+          <input type="date" class="tanggal-pengaduan form-control @error('tgl_pengaduan') is-invalid @enderror" id="tgl_pengaduan" name="tgl_pengaduan" value="{{old('tgl_pengaduan')}}">
           <div id="tgl_pengaduan" class="invalid-feedback">
             @error('tgl_pengaduan')
             {{$message}}
@@ -27,7 +27,7 @@
         <input type="hidden" class="form-control" id="nama" name="nama" value="{{Auth::user()->name}}">
         <div class="mb-3">
           <label for="isi_laporan" class="form-label">Tulis Laporan</label>
-          <textarea type="date" class="form-control @error('isi_laporan') is-invalid @enderror" id="isi_laporan" name="isi_laporan">{{old('alamat')}}</textarea>
+          <textarea type="date" class="form-control @error('isi_laporan') is-invalid @enderror" id="isi_laporan" name="isi_laporan">{{old('isi_laporan')}}</textarea>
           <div id="isi_laporan" class="invalid-feedback">
             @error('isi_laporan')
             {{$message}}

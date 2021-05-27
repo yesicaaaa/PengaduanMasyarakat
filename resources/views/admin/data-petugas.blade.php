@@ -11,6 +11,13 @@
       <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-fw fa-users mr-2"></i> Data Petugas</li>
     </ol>
   </nav>
+  <a href="/tambah_petugas" class="btn btn-success mb-3"><i class="fa fa-fw fa-plus"></i> Tambah Petugas</a>
+  <a href="/trash_petugas" class="btn btn-primary mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
+  @if(session('status'))
+  <div class="alert alert-success" role="alert">
+    {{session('status')}}
+  </div>
+  @endif
   <table class="table">
     <thead>
       <tr>
@@ -18,6 +25,7 @@
         <th scope="col">Nama Lengkap</th>
         <th scope="col">Email</th>
         <th scope="col">No. Telepon</th>
+        <th scope="col">Aksi</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +35,9 @@
         <td>{{$p->name}}</td>
         <td>{{$p->email}}</td>
         <td>{{$p->telp}}</td>
+        <td>
+          <a href="/soft_delete_petugas/{{$p->id}}" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td>
       </tr>
       @endforeach
     </tbody>

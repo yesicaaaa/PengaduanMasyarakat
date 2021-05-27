@@ -8,12 +8,12 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item ">Admin</li>
-      <li class="breadcrumb-item active" aria-current="page"><a href="/data_masyarakat"><i class="fa fa-fw fa-users mr-2"></i> Data Masyarakat</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="/data_petugas"><i class="fa fa-fw fa-users mr-2"></i> Data Petugas</a></li>
       <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-fw fa-archive mr-2"></i> Tempat Sampah</li>
     </ol>
   </nav>
-  <a href="/delete_permanent" class="btn btn-danger mb-3" onclick="return confirm('Apa kamu yakin')"><i class="fa fa-fw fa-minus-circle"></i> Hapus Permanen Semua</a>
-  <a href="/restore_all" class="btn btn-success mb-3"><i class="fa fa-fw fa-plus-circle"></i> Pulihkan Semua</a>
+  <a href="/delete_permanent_petugas" class="btn btn-danger mb-3" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus Permanen Semua</a>
+  <a href="/restore_all_petugas" class="btn btn-success mb-3"><i class="fa fa-fw fa-plus-circle"></i> Pulihkan Semua</a>
   @if(session('status'))
   <div class="alert alert-success" role="alert">
     {{session('status')}}
@@ -37,8 +37,8 @@
         <td>{{$u->email}}</td>
         <td>{{$u->telp}}</td>
         <td>
-          <a href="/restore/{{$u->id}}" class="button-pulihkan"><i class="fa fa-fw fa-plus-circle"></i> Pulihkan</a>
-          <a href="/delete/{{$u->id}}" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+          <a href="/restore_petugas/{{$u->id}}" class="button-pulihkan"><i class="fa fa-fw fa-plus-circle"></i> Pulihkan</a>
+          <a href="/delete_petugas/{{$u->id}}" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
         </td>
       </tr>
       @endforeach

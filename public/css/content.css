@@ -76,3 +76,19 @@ a {
 .button-pulihkan:hover {
     color: rgba(15, 128, 0, .6);
 }
+
+.breadcrumb a {
+  color: #6b7481 !important;
+}
+
+.button-detail {
+  color: green;
+}
+
+.button-detail:hover {
+    color: rgba(0, 128, 0, .6);
+}
+
+.tanggal-pengaduan {
+  width: 40%;
+}
