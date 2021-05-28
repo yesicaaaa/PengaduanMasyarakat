@@ -1,0 +1,139 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-blue sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/dashboard">Pengaduan Masyarakat</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    </ul>
+  </div>
+  <div class="dropdown">
+    <button class="dropdown-toggle" id="dropdownlogout" data-bs-toggle="dropdown" aria-expanded="false">
+      Yesica Anggraeni
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownlogout">
+      <li><a class="dropdown-item" href="/logout"><i class="fa fa-arrow-left"></i> Logout</a></li>
+    </ul>
+  </div>
+  <div class="sidenav">
+    <ul class="sidemenu">
+            <div class="divider"></div>
+      <li><a href="/data_masyarakat" class="menu"><i class="fa fa-fw fa-users"></i> Data Masyarakat</a></li>
+      <div class="divider"></div>
+      <li><a href="/data_petugas" class="menu"><i class="fa fa-fw fa-users"></i> Data Petugas</a></li>
+      <div class="divider"></div>
+                  <li><a href="/beri_tanggapan_view_admin" class="menu"><i class="fa fa-fw fa-edit"></i> Beri Tanggapan</a></li>
+      <div class="divider"></div>
+                        <li><a href="/generate_laporan" class="menu"><i class="fa fa-fw fa-file"></i> Generate Laporan</a></li>
+      <div class="divider"></div>
+                </ul>
+  </div>
+</nav><!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/content.css">
+  <link rel="stylesheet" type="text/css" href="/css/side-navbar.css">
+
+  <title>Data Masyarakat | Pengaduan Masyarakat</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="content">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active">Admin</li>
+      <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-fw fa-users mr-2"></i> Data Masyarakat</li>
+    </ol>
+  </nav>
+  <a href="/trash" class="btn btn-success mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
+  <a href="/export_excel_masyarakat" class="btn btn-warning mb-3"><i class="fa fa-fw fa-download"></i>Export Excel</a>
+    <table>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nama Lengkap</th>
+        <th scope="col">Email</th>
+        <th scope="col">No. Telepon</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+            <tr>
+        <th scope="row">1</th>
+        <td>Yesica Anggraeni</td>
+        <td>yesica@gmail.com</td>
+        <td>089478877732</td>
+        <!-- <td>
+          <a href="/soft-delete/2" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td> -->
+      </tr>
+            <tr>
+        <th scope="row">2</th>
+        <td>Ajeng Maelani</td>
+        <td>ajeng@gmail.com</td>
+        <td>088478297833</td>
+        <!-- <td>
+          <a href="/soft-delete/3" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td> -->
+      </tr>
+            <tr>
+        <th scope="row">3</th>
+        <td>Pebi Riyani</td>
+        <td>pebi@gmail.com</td>
+        <td>088478297833</td>
+        <!-- <td>
+          <a href="/soft-delete/5" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td> -->
+      </tr>
+            <tr>
+        <th scope="row">4</th>
+        <td>Alma Damayanti</td>
+        <td>alma@gmail.com</td>
+        <td>089478877732</td>
+        <!-- <td>
+          <a href="/soft-delete/6" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td> -->
+      </tr>
+            <tr>
+        <th scope="row">5</th>
+        <td>Nadia Damayanti</td>
+        <td>nadia@gmail.com</td>
+        <td>089578992322</td>
+        <!-- <td>
+          <a href="/soft-delete/7" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td> -->
+      </tr>
+            <tr>
+        <th scope="row">6</th>
+        <td>Lintang Ramadhani</td>
+        <td>lintang@gmail.com</td>
+        <td>083878999054</td>
+        <!-- <td>
+          <a href="/soft-delete/8" class="button-delete" onclick="return confirm('Apa kamu yakin?')"><i class="fa fa-fw fa-minus-circle"></i> Hapus</a>
+        </td> -->
+      </tr>
+          </tbody>
+  </table>
+</div>
+  </div>
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

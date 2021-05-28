@@ -3,15 +3,20 @@
 namespace App\Exports;
 
 use App\Models\Masyarakat;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\Exportable;
 
-class MasyarakatExport implements FromCollection
+class MasyarakatExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    use Exportable;
+    public function view(): View
     {
-        return Masyarakat::all();
+        return view('admin.export-data-masyarakat', [
+            'masyarakat'    => Masyarakat::join('role_user', 'role_user.user_id', '=', 'users.id')
+                                ->select('name', 'email', 'telp')
+                                ->where('role_user.role_id', 3)->get()
+            // 'masyarakat'    => Masyarakat::all()
+        ]);
     }
 }

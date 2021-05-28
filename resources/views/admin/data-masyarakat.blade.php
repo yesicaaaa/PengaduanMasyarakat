@@ -11,13 +11,27 @@
       <li class="breadcrumb-item active" aria-current="page"><i class="fa fa-fw fa-users mr-2"></i> Data Masyarakat</li>
     </ol>
   </nav>
-  <a href="/trash" class="btn btn-success mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
-  <a href="/export_excel_masyarakat" class="btn btn-warning mb-3"><i class="fa fa-fw fa-download"></i>Export Excel</a>
   @if(session('status'))
   <div class="alert alert-success" role="alert">
     {{session('status')}}
   </div>
   @endif
+  <a href="/trash" class="btn btn-success mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
+  <a href="/export_excel_masyarakat" class="btn btn-warning mb-3"><i class="fa fa-fw fa-download"></i>Export Excel</a>
+  <a href="/export_pdf_masyarakat" class="btn btn-danger mb-3"><i class="fa fa-fw fa-download"></i>Export PDF</a>
+  <form action="/import_excel_masyarakat" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="mb-1 importexcel">
+      <label for="importExcel" class="form-label">Upload File Excel</label>
+      <input type="file" class="form-control @error('file') is-invalid @enderror" id="importExcel" name="file">
+      <div class="invalid-feedback">
+        @error('file')
+        {{$message}}
+        @enderror
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
   <table class="table">
     <thead>
       <tr>

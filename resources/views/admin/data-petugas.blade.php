@@ -13,6 +13,8 @@
   </nav>
   <a href="/tambah_petugas" class="btn btn-success mb-3"><i class="fa fa-fw fa-plus"></i> Tambah Petugas</a>
   <a href="/trash_petugas" class="btn btn-primary mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
+  <a href="/export_excel_petugas" class="btn btn-warning mb-3"><i class="fa fa-fw fa-download"></i>Export Excel</a>
+  <a href="/export_pdf_petugas" class="btn btn-danger mb-3"><i class="fa fa-fw fa-download"></i>Export PDF</a>
   @if(session('status'))
   <div class="alert alert-success" role="alert">
     {{session('status')}}

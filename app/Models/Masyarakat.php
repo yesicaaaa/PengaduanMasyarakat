@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Masyarakat extends Model
 {
     protected $table = "users";
+    protected $fillable = ['name', 'email', 'password', 'telp'];
+    
 }

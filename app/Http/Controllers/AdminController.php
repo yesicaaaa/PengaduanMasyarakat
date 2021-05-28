@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Exports\MasyarakatExport;
+use App\Exports\PetugasExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use App\Imports\MasyarakatImport;
 
 
 class AdminController extends Controller
@@ -268,5 +271,43 @@ class AdminController extends Controller
     {
         // return (new MasyarakatExport)->download('data-masyarakat.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         return Excel::download(new MasyarakatExport, 'data-masyarakat.xlsx');
+    }
+
+    public function export_excel_petugas()
+    {
+        return Excel::download(new PetugasExport, 'data-petugas.xlsx');
+    }
+
+    public function export_pdf_masyarakat()
+    {
+        $masyarakat = Masyarakat::join('role_user', 'role_user.user_id', '=', 'users.id')
+                    ->where('role_user.role_id', 3)->get();
+        $pdf = PDF::loadview('admin.pdf-data-masyarakat', compact('masyarakat'));
+        return $pdf->download('data-masyarakat.pdf');
+    }
+
+    public function export_pdf_petugas()
+    {
+        $petugas = User::join('role_user', 'role_user.user_id', '=', 'users.id')
+                    ->where('role_user.role_id', '!=', 3)->get();
+        $pdf = PDF::loadview('admin.pdf-data-petugas', compact('petugas'));
+        return $pdf->download('data-petugas.pdf');
+    }
+
+    public function import_excel_masyarakat(Request $request)
+    {
+        $request->validate([
+            'file'  => 'required|mimes:csv,xls,xlsx'
+        ]);
+        //menangkap file excel
+        $file = $request->file('file');
+        //membuat nama file unik
+        $nama_file = rand().$file->getClientOriginalName();
+        //upload ke folder didalam folder public
+        $file->move('file_import', $nama_file);
+
+        Excel::import(new MasyarakatImport, public_path('/file_import/'.$nama_file));
+        
+        return redirect('/data_masyarakat')->with('status', 'Data Masyarakat berhasil diimport.');
     }
 }

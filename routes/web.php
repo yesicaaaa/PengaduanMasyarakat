@@ -78,6 +78,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/all_delete_permanent_pengaduan', [AdminController::class, 'all_delete_permanent_pengaduan']);
     Route::get('/restore_all_pengaduan', [AdminController::class, 'restore_all_pengaduan']);
     Route::get('/export_excel_masyarakat', [AdminController::class, 'export_excel_masyarakat']);
+    Route::get('/export_excel_petugas', [AdminController::class, 'export_excel_petugas']);
+    Route::get('/export_pdf_masyarakat', [AdminController::class, 'export_pdf_masyarakat']);
+    Route::get('/export_pdf_petugas', [AdminController::class, 'export_pdf_petugas']);
+    Route::post('/import_excel_masyarakat', [AdminController::class, 'import_excel_masyarakat']);
 });
 
 //route petugas
