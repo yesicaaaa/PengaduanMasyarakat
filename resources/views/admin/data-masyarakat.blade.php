@@ -19,7 +19,7 @@
   <a href="/trash" class="btn btn-success mb-3"><i class="fa fa-fw fa-archive"></i> Tempat Sampah</a>
   <a href="/export_excel_masyarakat" class="btn btn-warning mb-3"><i class="fa fa-fw fa-download"></i>Export Excel</a>
   <a href="/export_pdf_masyarakat" class="btn btn-danger mb-3"><i class="fa fa-fw fa-download"></i>Export PDF</a>
-  <form action="/import_excel_masyarakat" method="POST" enctype="multipart/form-data">
+  <!-- <form action="/import_excel_masyarakat" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-1 importexcel">
       <label for="importExcel" class="form-label">Upload File Excel</label>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Upload</button>
-  </form>
+  </form> -->
   <table class="table">
     <thead>
       <tr>
